@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Author</key>
+	<string>Simon Evans</string>
+	<key>Builder Version</key>
+	<string>10600.7.12</string>
+	<key>CFBundleDisplayName</key>
+	<string>Readon</string>
+	<key>CFBundleIdentifier</key>
+	<string>org.si.readon</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>Chrome</key>
+	<dict>
+		<key>Global Page</key>
+		<string>global.html</string>
+		<key>Menus</key>
+		<array>
+			<dict>
+				<key>Identifier</key>
+				<string>menu</string>
+				<key>Menu Items</key>
+				<array>
+					<dict>
+						<key>Command</key>
+						<string>whitelist_page</string>
+						<key>Disabled</key>
+						<false/>
+						<key>Identifier</key>
+						<string>whitelist_page</string>
+						<key>Title</key>
+						<string>Whitelist page</string>
+					</dict>
+					<dict>
+						<key>Command</key>
+						<string>whitelist_site</string>
+						<key>Identifier</key>
+						<string>whitelist_site</string>
+						<key>Title</key>
+						<string>Whitelist site</string>
+					</dict>
+					<dict>
+						<key>Separator</key>
+						<true/>
+					</dict>
+					<dict>
+						<key>Command</key>
+						<string>toggle_disable</string>
+						<key>Identifier</key>
+						<string>toggle_disable</string>
+						<key>Title</key>
+						<string>Disable Readon</string>
+					</dict>
+					<dict>
+						<key>Command</key>
+						<string>settings</string>
+						<key>Identifier</key>
+						<string>settings</string>
+						<key>Title</key>
+						<string>Settings</string>
+					</dict>
+				</array>
+			</dict>
+		</array>
+		<key>Toolbar Items</key>
+		<array>
+			<dict>
+				<key>Command</key>
+				<string></string>
+				<key>Identifier</key>
+				<string>readonbutton</string>
+				<key>Image</key>
+				<string>icon.png</string>
+				<key>Include By Default</key>
+				<true/>
+				<key>Label</key>
+				<string>Readon</string>
+				<key>Menu</key>
+				<string>menu</string>
+				<key>Palette Label</key>
+				<string>ReadOn</string>
+				<key>Popover</key>
+				<string></string>
+				<key>Tool Tip</key>
+				<string>readon</string>
+			</dict>
+		</array>
+	</dict>
+	<key>Content</key>
+	<dict>
+		<key>Scripts</key>
+		<dict/>
+	</dict>
+	<key>Description</key>
+	<string>Automatically enable Reader mode</string>
+	<key>DeveloperIdentifier</key>
+	<string>U2L29966XS</string>
+	<key>ExtensionInfoDictionaryVersion</key>
+	<string>1.0</string>
+	<key>Permissions</key>
+	<dict>
+		<key>Website Access</key>
+		<dict>
+			<key>Include Secure Pages</key>
+			<true/>
+			<key>Level</key>
+			<string>All</string>
+		</dict>
+	</dict>
+	<key>Update Manifest URL</key>
+	<string>http://si.org/safari/readon/update.plist</string>
+	<key>Website</key>
+	<string>http://si.org/safari/readon</string>
+</dict>
+</plist>
