@@ -1,3 +1,5 @@
+"use strict";
+
 // Settings page
 
 function startUp(event) {
@@ -6,33 +8,31 @@ function startUp(event) {
         window.location.reload(); 
 
     safari.self.addEventListener("message", messageHandler, false);
-    safari.self.tab.dispatchMessage("sendWhitelists", null);
+    safari.self.tab.dispatchMessage("sendDisableLists", null);
 
 }
 
 
 function messageHandler(event) {
-    if(event.name === "whitelists") {
-        var pages = document.getElementById('whitelisted_pages');
-        pages.innerHTML = '';
+    if(event.name === "disableLists") {
+        var element = document.getElementById('disabledURLs');
+        element.innerHTML = '';
 
-        var wl = event.message.page;
-        for(var i = 0; i < wl.length; i++) {
-            pages.add(new Option(wl[i]));
+        var urls = event.message.page;
+        for(var i = 0; i < urls.length; i++) {
+            element.add(new Option(urls[i]));
         }
 
-        wl = event.message.site;
-        var sites = document.getElementById('whitelisted_sites');
-        for(var i = 0; i < wl.length; i++) {
-            pages.add(new Option(wl[i]));
+        urls = event.message.site;
+        for(var i = 0; i < urls.length; i++) {
+            element.add(new Option(urls[i]));
         }
-
     }
 }
 
 
 function removeURLs(all) {
-    var pages = document.getElementById('whitelisted_pages');
+    var pages = document.getElementById('disabledURLs');
 
     for(var i = 0; i < pages.children.length; i++) {
         var child = pages.children[i];
@@ -46,7 +46,7 @@ function removeURLs(all) {
 
 
 function addPageURL() {
-    var e = document.getElementById('new_url');
+    var e = document.getElementById('newURL');
     safari.self.tab.dispatchMessage('addPageURL', e.value.trim());
     e.value = '';
 
@@ -55,7 +55,7 @@ function addPageURL() {
 
 
 function addSiteURL() {
-    var e = document.getElementById('new_url');
+    var e = document.getElementById('newURL');
     safari.self.tab.dispatchMessage('addSiteURL', e.value.trim());
     e.value = '';
 

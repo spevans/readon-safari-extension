@@ -29,21 +29,21 @@
 				<array>
 					<dict>
 						<key>Command</key>
-						<string>whitelist_page</string>
+						<string>disablePage</string>
 						<key>Disabled</key>
 						<false/>
 						<key>Identifier</key>
-						<string>whitelist_page</string>
+						<string>disablePage</string>
 						<key>Title</key>
-						<string>Whitelist page</string>
+						<string>Disable for page</string>
 					</dict>
 					<dict>
 						<key>Command</key>
-						<string>whitelist_site</string>
+						<string>disableSite</string>
 						<key>Identifier</key>
-						<string>whitelist_site</string>
+						<string>disableSite</string>
 						<key>Title</key>
-						<string>Whitelist site</string>
+						<string>Disable for site</string>
 					</dict>
 					<dict>
 						<key>Separator</key>
@@ -51,9 +51,9 @@
 					</dict>
 					<dict>
 						<key>Command</key>
-						<string>toggle_disable</string>
+						<string>toggleDisable</string>
 						<key>Identifier</key>
-						<string>toggle_disable</string>
+						<string>toggleDisable</string>
 						<key>Title</key>
 						<string>Disable Readon</string>
 					</dict>

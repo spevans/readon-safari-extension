@@ -1,10 +1,9 @@
-// Message if Reader mode is available
+"use strict";
+
+
 safari.application.addEventListener("available", availableHandler, true);
-// Contextual Menu and Toolbar item
 safari.application.addEventListener("command", commandHandler, false);
-//safari.application.addEventListener("validate", qURLValidate, false);
 safari.application.addEventListener("menu", menuHandler, true);
-// Messages from settings page
 safari.application.addEventListener("message", messageHandler, false);
 
 
@@ -20,7 +19,7 @@ safari.application.addEventListener("message", messageHandler, false);
             var myReader = event.target;
             var url = myReader.tab.url;
 
-            if (isWhiteListed(url)) {
+            if (isDisabledURL(url)) {
                 return;
             }
             myReader.enter();
@@ -28,7 +27,72 @@ safari.application.addEventListener("message", messageHandler, false);
     }
 
 
-    function isWhiteListed(url) {
+    // Invoked just before menu is shown
+    function menuHandler(event) {
+        var url = safari.application.activeBrowserWindow.activeTab.url;
+
+        var site = getSiteURL(url);
+        var page = getPageURL(url);
+        if (page.length > 57) {
+            page = page.substring(0, 57) + '...';
+        }
+
+        menuItem('disablePage').title = 'Disable for page ' + page;
+        menuItem('disableSite').title = 'Disable for site ' + site;
+        menuItem('toggleDisable').title = safari.extension.settings.disabled ? 'Enable Readon' : 'Disable Readon';
+    }
+
+
+    // Messages from the menu
+    function commandHandler(event) {
+        var tab = safari.application.activeBrowserWindow.activeTab;
+        switch (event.command) {
+
+        case 'disablePage':
+            addToPageDisableList(tab.url);
+            tab.reader.exit();
+            break;
+
+        case 'disableSite':
+            addToSiteDisableList(tab.url);
+            tab.reader.exit();
+            break;
+
+
+        case 'toggleDisable':
+            toggleDisble(tab);
+            break;
+
+        case 'settings':
+            showSettings();
+            break;
+        }
+    }
+
+
+    // Messages from the settings page
+    function messageHandler(event) {
+        switch (event.name) {
+        case 'sendDisableLists':
+            event.target.page.dispatchMessage('disableLists', disableLists());
+            break;
+
+        case 'addPageURL':
+            addToPageDisableList(event.message);
+            break;
+
+        case 'addSiteURL':
+            addToSiteDisableList(event.message);
+            break;
+
+        case 'removeURL':
+            removeURL(event.message);
+            break;
+        }
+    }
+
+
+    function isDisabledURL(url) {
         var page = getPageURL(url);
 
         var disable = disableLists();
@@ -45,72 +109,7 @@ safari.application.addEventListener("message", messageHandler, false);
     }
 
 
-    // Invoked just before menu is shown
-    function menuHandler(event) {
-        var url = safari.application.activeBrowserWindow.activeTab.url;
-
-        var site = getSiteURL(url);
-        var page = getPageURL(url);
-        if (page.length > 57) {
-            page = page.substring(0, 57) + '...';
-        }
-
-        menuItem('whitelist_page').title = "Whitelist page " + page;
-        menuItem('whitelist_site').title = "Whitelist site " + site;
-        menuItem('toggle_disable').title = safari.extension.settings.disabled ? 'Enable Readon' : 'Disable Readon';
-    }
-
-
-    // Messages from the menu
-    function commandHandler(event) {
-        var tab = safari.application.activeBrowserWindow.activeTab;
-        switch (event.command) {
-
-        case 'whitelist_page':
-            addToPageWhiteList(tab.url);
-            tab.reader.exit();
-            break;
-
-        case 'whitelist_site':
-            addToSiteWhiteList(tab.url);
-            tab.reader.exit();
-            break;
-
-
-        case 'toggle_disable':
-            toggleDisble(tab);
-            break;
-
-        case 'settings':
-            showSettings();
-            break;
-        }
-    }
-
-
-    // Messages from the settings page
-    function messageHandler(event) {
-        switch (event.name) {
-        case 'sendWhitelists':
-            event.target.page.dispatchMessage('whitelists', disableLists());
-            break;
-
-        case 'addPageURL':
-            addToPageWhiteList(event.message);
-            break;
-
-        case 'addSiteURL':
-            addToSiteWhiteList(event.message);
-            break;
-
-        case 'removeURL':
-            removeURL(event.message);
-            break;
-        }
-    }
-
-
-    function addToPageWhiteList(url) {
+    function addToPageDisableList(url) {
         url = getPageURL(url);
         if (url === undefined || url === '') {
             return;
@@ -124,7 +123,7 @@ safari.application.addEventListener("message", messageHandler, false);
     }
 
 
-    function addToSiteWhiteList(url) {
+    function addToSiteDisableList(url) {
         url = getSiteURL(url);
         if (url === undefined || url === '') {
             return;
@@ -139,7 +138,6 @@ safari.application.addEventListener("message", messageHandler, false);
 
 
     function removeURL(url) {
-        var url = event.message;
         var disable = disableLists();
 
         var idx = disable.site.indexOf(url);
@@ -197,7 +195,7 @@ safari.application.addEventListener("message", messageHandler, false);
         safari.extension.settings.disableList = disable;
         if (settingsTab !== undefined) {
             // update the settings page
-            settingsTab.page.dispatchMessage('whitelists', disableLists());
+            settingsTab.page.dispatchMessage('disableLists', disableLists());
         }
     }
 

@@ -13,15 +13,15 @@
         <table style="width: 100%">
             <tr>
                 <td colspan="2" style="width: 100%">
-                    <h3>Never enable Reader mode for these pages</h3>
-                    You can specify a list of pages or sites on which Readon will not activate Reader mode.
+                    <h3>Do not enable Reader mode for these pages and sites</h3>
+                    You can specify a list of pages and sites on which Readon will not activate Reader mode.
                     <p>
-                        Enter the URL or a site or page to disable Readon
+                        Enter the URL for a site or page to disable Readon
                 </td>
             </tr>
             <tr>
                 <td>
-                    <input type="text" id="new_url" style="width: 99%" />
+                    <input type="text" id="newURL" style="width: 99%" />
                 </td>
                 <td align="left">
                     <input type="button" value="Add Page" onclick="javascript:addPageURL();" />
@@ -30,7 +30,7 @@
             </tr>
             <tr>
                 <td style="width: 50%" border=1>
-                    <select multiple id="whitelisted_pages" style="width: 100%; height: 300px" size="15">
+                    <select multiple id="disabledURLs" style="width: 100%; height: 300px" size="15">
                     </select>
                 </td>
                 <td align="left" valign="top">
