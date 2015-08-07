@@ -1,13 +1,13 @@
 "use strict";
 
 
-safari.application.addEventListener("available", availableHandler, true);
-safari.application.addEventListener("command", commandHandler, false);
-safari.application.addEventListener("menu", menuHandler, true);
-safari.application.addEventListener("message", messageHandler, false);
+(function() {
+    safari.application.addEventListener("available", availableHandler, true);
+    safari.application.addEventListener("command", commandHandler, false);
+    safari.application.addEventListener("menu", menuHandler, true);
+    safari.application.addEventListener("message", messageHandler, false);
 
 
-{
     var settingsTab;
 
     // Triggered if reader mode is available
@@ -193,7 +193,7 @@ safari.application.addEventListener("message", messageHandler, false);
 
     function saveDisableLists(disable) {
         safari.extension.settings.disableList = disable;
-        if (settingsTab !== undefined) {
+        if (settingsTab !== undefined && settingsTab.page !== undefined ) {
             // update the settings page
             settingsTab.page.dispatchMessage('disableLists', disableLists());
         }
@@ -225,6 +225,6 @@ safari.application.addEventListener("message", messageHandler, false);
 
         // remove protocol
         url = url.replace(/^[^/]*\/\//, '');
-        return url;
-    }
+    return url;
 }
+})();

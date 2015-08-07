@@ -6,7 +6,7 @@
         <script src="settings.js"></script>
     </head>
 
-    <body onpageshow="startUp();">
+    <body>
         <h1>Readon Settings</h1>
 
 
@@ -24,8 +24,8 @@
                     <input type="text" id="newURL" style="width: 99%" />
                 </td>
                 <td align="left">
-                    <input type="button" value="Add Page" onclick="javascript:addPageURL();" />
-                    <input type="button" value="Add Site" onclick="javascript:addSiteURL();" />
+                    <input type="button" id="addPage" value="Add Page" />
+                    <input type="button" id="addSite" value="Add Site" />
                 </td>
             </tr>
             <tr>
@@ -35,9 +35,9 @@
                 </td>
                 <td align="left" valign="top">
                     <br>
-                    <input type="button" value="Remove Selected" onclick="javascript:removeURLs();" />
+                    <input type="button" id="removeURL" value="Remove Selected" />
                     <br>
-                    <input type="button" value="Remove All" onclick="javascript:removeURLs(true);" />
+                    <input type="button" id="removeAllURLs" value="Remove All" />
                 </td>
             </tr>
         </table>
