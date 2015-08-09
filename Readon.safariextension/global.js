@@ -37,8 +37,19 @@
             page = page.substring(0, 57) + '...';
         }
 
-        menuItem('disablePage').title = 'Disable for page ' + page;
-        menuItem('disableSite').title = 'Disable for site ' + site;
+        var disable = disableLists();
+        if (disable.page.indexOf(page) > -1) {
+            menuItem('disablePage').title = 'Enable for page ' + page;
+        } else {
+            menuItem('disablePage').title = 'Disable for page ' + page;
+        }
+
+        if (disable.site.indexOf(site) > -1) {
+            menuItem('disableSite').title = 'Enable for site ' + site;
+        } else {
+            menuItem('disableSite').title = 'Disable for site ' + site;
+        }
+
         menuItem('toggleDisable').title = safari.extension.settings.disabled ? 'Enable Readon' : 'Disable Readon';
     }
 
