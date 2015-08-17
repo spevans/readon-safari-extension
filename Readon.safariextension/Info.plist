@@ -76,7 +76,7 @@
 				<key>Identifier</key>
 				<string>readonbutton</string>
 				<key>Image</key>
-				<string>icon.png</string>
+				<string>Icon-32.png</string>
 				<key>Include By Default</key>
 				<true/>
 				<key>Label</key>
